@@ -49,3 +49,8 @@ After you add a friend, you can delete them from your friends list. -->
 ***
 #### Chat :speech_balloon:
 A group chat that allows you to talk with all you friends.
+
+***
+***
+## ERD
+![Nutshell ERD][/Nutshell.png]
