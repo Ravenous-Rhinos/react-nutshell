@@ -27,9 +27,6 @@ npm start
 #### Login :lock:
 Register for a profile or login to an existing profile.
 ***
-#### Profile :bust_in_silhouette:
-This section displays your username and lets you personalize your dashboard with a picture, birthday, and bio.
-***
 #### Events :calendar:
 Create an event with a title, location, and date.
 Events are sorted by nearest date in descending order.
