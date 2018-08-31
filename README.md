@@ -53,4 +53,4 @@ A group chat that allows you to talk with all you friends.
 ***
 ***
 ## ERD
-![Nutshell ERD][Nutshell.png]
+![Nutshell ERD](Nutshell.png)
