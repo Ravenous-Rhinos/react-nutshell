@@ -22,7 +22,7 @@ export default class TaskForm extends Component {
     constructNewTask = evt => {
         evt.preventDefault()
         if (this.state.task === "") {
-            window.alert("Please select a caretaker")
+            window.alert("Please add a new task")
         } else {
             const newTask = {
                 name: this.state.task,
@@ -38,12 +38,18 @@ export default class TaskForm extends Component {
             <React.Fragment>
                 <form className="TaskForm">
                     <div className="form-group">
-                        <label htmlFor="newTask">New Task</label>
+                        <label htmlFor="newTask">I Need To...</label>
                         <input type="text" required="true"
                             className="form-control"
                             onChange={this.handleFieldChange}
                             id="task"
-                            placeholder="I Need To..." />
+                            placeholder="ummmm...." />
+                            
+                            <input type="date" required="true"
+                            className="form-control"
+                            onChange={this.handleFieldChange}
+                            id="task"
+                            placeholder="By" />
                     </div>
 
                     <button type="submit" onClick={this.constructNewTask} className="btn btn-primary">Submit</button>

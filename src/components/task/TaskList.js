@@ -23,7 +23,7 @@ class TaskList extends Component {
                             <div className="card-body">
                                 <h5 className="card-title">
                                     {task.name}
-                                {task.phone}
+                                {task.date}
                                 <Link className="nav-link" to={`/tasks/${task.id}`}>Details</Link>
                                     <a href="#"
                                         onClick={() => this.props.deleteTask(task.id)}
