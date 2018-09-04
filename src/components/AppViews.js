@@ -2,6 +2,8 @@ import { Route, Redirect } from 'react-router-dom'
 import React, { Component } from "react"
 import Login from './Login'
 import DataManager from '../data/DataManager'
+import "./AppViews.css"
+
 
 import ArticleForm from './article/ArticleForm'
 import ArticleList from './article/ArticleList'
@@ -50,6 +52,10 @@ export default class AppViews extends Component {
         .then(articles => this.setState({
             articles: articles
         }))
+    editArticle = (id, article) => DataManager.edit("articles", id, article)
+        .then(articles => this.setState({
+            articles: articles
+        }))
 
 
     addChat = (chat, link) => DataManager.post(chat, link)
@@ -79,7 +85,7 @@ export default class AppViews extends Component {
         .then(events => this.setState({
             events: events
         }))
-    deletEvent = (id, link) => DataManager.removeAndList(id, link)
+    deleteEvent = (id, link) => DataManager.removeAndList(id, link)
         .then(() => DataManager.getAll("events"))
         .then(events => this.setState({
             events: events
@@ -148,9 +154,9 @@ export default class AppViews extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <div className="viewArea">
+                <React.Fragment>
                     <Route path="/login" component={Login} />
-
 
                     <Route exact path="/articles" render={(props) => {
                         if (this.isAuthenticated()) {
@@ -159,36 +165,36 @@ export default class AppViews extends Component {
                                 deleteArticle={this.deleteArticle} />
                         } else {
                             return <Redirect to="/login" />
-                    }} }/>
-
+                        }
+                    }} />
                     <Route path="/articles/new" render={(props) => {
                         return <ArticleForm {...props}
-                            addArticle={this.addArticle}/>
+                            addArticle={this.addArticle} />
                     }} />
                     <Route path="/articles/edit/:articleId(\d+)" render={(props) => {
                         return <ArticleEdit {...props}
                             editArticle={this.editArticle}
-                            articles={this.state.articles}/>
+                            articles={this.state.articles} />
                     }} />
 
 
                     <Route exact path="/chats" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <ChatList {...props}
-                            deletechat={this.deletechat}
+                                deletechat={this.deletechat}
                                 chats={this.state.chats}
-                                />
+                            />
                         } else {
                             return <Redirect to="/login" />
                         }
                     }} />
                     <Route path="/chats/new" render={(props) => {
                         return <ChatForm {...props}
-                            addChat={this.addChat}/>
+                            addChat={this.addChat} />
                     }} />
                     <Route path="/chats/edit/:chatId(\d+)" render={(props) => {
                         return <ChatEdit {...props}
-                            editChat={this.editChat}/>
+                            editChat={this.editChat} />
                     }} />
 
 
@@ -199,14 +205,15 @@ export default class AppViews extends Component {
                                 deleteEvent={this.deleteEvent} />
                         } else {
                             return <Redirect to="/login" />
-                    }} }/>
+                        }
+                    }} />
                     <Route path="/events/new" render={(props) => {
                         return <EventForm {...props}
-                            addEvent={this.addEvent}/>
+                            addEvent={this.addEvent} />
                     }} />
                     <Route path="/events/edit/:eventId(\d+)" render={(props) => {
                         return <EventEdit {...props}
-                            editEvent={this.editEvent}/>
+                            editEvent={this.editEvent} />
                     }} />
 
                     <Route exact path="/tasks" render={(props) => {
@@ -216,14 +223,15 @@ export default class AppViews extends Component {
                                 deleteTask={this.deleteTask} />
                         } else {
                             return <Redirect to="/login" />
-                    }} }/>
+                        }
+                    }} />
                     <Route path="/tasks/new" render={(props) => {
                         return <TaskForm {...props}
-                            addTask={this.addTask}/>
+                            addTask={this.addTask} />
                     }} />
                     <Route path="/tasks/edit/:taskId(\d+)" render={(props) => {
                         return <TaskEdit {...props}
-                            editTask={this.editTask}/>
+                            editTask={this.editTask} />
                     }} />
 
                     <Route exact path="/friends" render={(props) => {
@@ -233,16 +241,18 @@ export default class AppViews extends Component {
                                 deleteFriend={this.deleteFriend} />
                         } else {
                             return <Redirect to="/login" />
-                    }} }/>
+                        }
+                    }} />
                     <Route path="/friends/new" render={(props) => {
                         return <FriendForm {...props}
-                            addFriend={this.addFriend}/>
+                            addFriend={this.addFriend} />
                     }} />
                     <Route path="/friends/edit/:friendId(\d+)" render={(props) => {
                         return <FriendEdit {...props}
-                            editFriend={this.editFriend}/>
+                            editFriend={this.editFriend} />
                     }} />
                 </React.Fragment>
+            </div>
         )
     }
 
