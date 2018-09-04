@@ -34,7 +34,7 @@ export default class AppViews extends Component {
 
     state = {
         articles: [],
-        chat: [],
+        chats: [],
         events: [],
         friends: [],
         tasks: []
@@ -123,7 +123,7 @@ export default class AppViews extends Component {
                 articles: allArticles
             })
         })
-        DataManager.getAll("chat").then(allChat => {
+        DataManager.getAll("chats").then(allChat => {
             this.setState({
                 chat: allChat
             })
@@ -174,7 +174,7 @@ export default class AppViews extends Component {
 
                     <Route exact path="/chats" render={(props) => {
                         if (this.isAuthenticated()) {
-                            return <chatList {...props}
+                            return <ChatList {...props}
                             deletechat={this.deletechat}
                                 chats={this.state.chats}
                                 />
