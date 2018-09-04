@@ -1,34 +1,73 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
-import "./animal.css"
-import dog from "./DogIcon.png"
+// import "./article.css"
 
+export default class ArticleForm extends Component {
+    // Set initial state
+    state = {
+        animalName: "",
+        employee: "",
+        owner: ""
+    }
 
-export default class AnimalDetail extends Component {
+    // Update state whenever an input field is edited
+    handleFieldChange = evt => {
+            const stateToChange = {}
+            stateToChange[evt.target.id] = evt.target.value
+        this.setState(stateToChange)
+    }
+
+    /*
+        Local method for validation, creating article object, and
+        invoking the function reference passed from parent component
+     */
+    createNewArticle = evt => {
+        evt.preventDefault()
+        if (this.state.employee === "") {
+            window.alert("Please select a caretaker")
+        } else {
+            const article = {
+                name: this.state.articleName,
+            }
+            // Create the article and redirect user to article list
+            this.props.addArticle(article).then(() => this.props.history.push("/articles"))
+        }
+    }
+
     render() {
-        /*
-            Using the route parameter, find the animal that the
-            user clicked on by looking at the `this.props.animals`
-            collection that was passed down from ApplicationViews
-        */
-        const animal = this.props.animals.find(a => a.id === parseInt(this.props.match.params.animalId, 0)) || {}
         return (
-            <section className="animal">
-                <div key={animal.id} className="card">
-                    <div className="card-body">
-                        <h4 className="card-title">
-                            <img src={dog} className="icon--dog" />
-                            {animal.name}
-                        </h4>
-                        <h6 className="card-title">{animal.breed}</h6>
-                        <Link className="nav-link" to={`/animals/edit/${animal.id}`}>edit</Link>
-                        <a href="#"
-                            onClick={() => this.props.deleteAnimal(animal.id)
-                                .then(() => this.props.history.push("/animals"))}
-                            className="card-link">Delete</a>
+            <React.Fragment>
+                <form className="articleForm">
+                    <div className="form-group">
+                        <label htmlFor="articleName">Article name</label>
+                        <input type="text" required="true"
+                               className="form-control"
+                               onChange={this.handleFieldChange}
+                               id="articleName"
+                               placeholder="Article name" />
                     </div>
-                </div>
-            </section>
+                    <div className="form-group">
+                        <label htmlFor="employee">Assign to caretaker</label>
+                        <select defaultValue="" name="employee" id="employee"
+                                onChange={this.handleFieldChange}>
+                            <option value="">Select an employee</option>
+                        {
+                            this.props.employees.map(e => <option key={e.id} id={e.id}>{e.name}</option>)
+                        }
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="owner">Assign to owner</label>
+                        <select defaultValue="" name="owner" id="owner"
+                                onChange={this.handleFieldChange}>
+                            <option value="">Select an owner</option>
+                        {
+                            this.props.owners.map(e => <option key={e.id} id={e.id}>{e.name}</option>)
+                        }
+                        </select>
+                    </div>
+                    <button type="submit" onClick={this.createNewArticle} className="btn btn-primary">Submit</button>
+                </form>
+            </React.Fragment>
         )
     }
 }
