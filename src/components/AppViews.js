@@ -178,7 +178,7 @@ export default class AppViews extends Component {
                     <Route exact path="/chats" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <ChatList {...props}
-                                deletechat={this.deletechat}
+                                deleteChat={this.deleteChat}
                                 chats={this.state.chats}
                             />
                         } else {
