@@ -103,22 +103,12 @@ export default class AppViews extends Component {
             tasks: tasks
         }))
 
-        deleteTask = id => {
-            return fetch(`http://localhost:5002/tasks/${id}`, {
-                method: "DELETE"
-            })
-                .then(e => e.json())
-                .then(() => fetch(`http://localhost:5002/tasks`))
-                .then(e => e.json())
-                .then(tasks => this.setState({
-                    tasks: tasks
-                }))
-        }
-    // deleteTask = (id, link) => DataManager.removeAndList(id, link)
-    //     .then(() => DataManager.getAll("tasks"))
-    //     .then(tasks => this.setState({
-    //         tasks: tasks
-    //     }))
+
+    deleteTask = (id, link) => DataManager.removeAndList(id, link)
+        .then(() => DataManager.getAll("tasks"))
+        .then(tasks => this.setState({
+            tasks: tasks
+        }))
 
 
 // FRIENDS
@@ -242,7 +232,8 @@ export default class AppViews extends Component {
                     if (this.isAuthenticated()) {
                         return <TaskList {...props}
                             tasks={this.state.tasks}
-                            deleteTask={this.deleteTask} />
+                            deleteTask={this.deleteTask}
+                            />
                     } else {
                         return <Redirect to="/login" />
                     }

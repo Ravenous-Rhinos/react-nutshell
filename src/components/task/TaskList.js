@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+
 
 
 class TaskList extends Component {
@@ -13,30 +13,32 @@ class TaskList extends Component {
                             this.props.history.push("/tasks/new")
                         }
                         }>
-                       Add Task
+                        Add Task
                 </button>
                 </div>
                 <section className="tasks">
                     {
                         this.props.tasks.map(task =>
                             <div key={task.id} className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">
-                                    {task.name}
-                                {task.date}
-                                <Link className="nav-link" to={`/tasks/${task.id}`}>Details</Link>
-                                    <a href="#"
-                                        onClick={() => this.props.deleteTask(task.id)}
-                                        className="card-link">Delete</a>
-                                </h5>
-                            </div>
+                                <div className="card-body">
+                                    <h5 className="card-title">
+                                        {task.name}
+                                        
+                                        <a href="#"
+                                            onClick={() => this.props.deleteTask(task.id, 'tasks')}
+                                            className="card-link">Delete</a>
+                                        <a href="#"
+                                            onClick={() => { this.props.history.push(`/tasks/edit/${task.id}`)}}
+                                            className="card-link">Edit</a>
+                                    </h5>
+                                </div>
                             </div>
                         )
                     }
                 </section>
-                </React.Fragment>
-                )
-            }
-        }
-        
+            </React.Fragment>
+        )
+    }
+}
+
 export default TaskList
