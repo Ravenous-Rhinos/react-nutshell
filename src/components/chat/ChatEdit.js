@@ -4,10 +4,13 @@ import "./Chat.css"
 export default class ChatForm extends Component {
     // Set initial state
     state = {
-        chatName: ""
+        message: ""
     }
 
-    
+    componentDidMount() {
+        const message = this.props.chats.find(a => a.id === parseInt(this.props.match.params.chatId))
+        this.setState(message);
+    }
 
     // Update state whenever an input field is edited
     handleFieldChange = evt => {
@@ -23,7 +26,7 @@ export default class ChatForm extends Component {
     editChat = evt => {
         evt.preventDefault()
             const chat = {
-                name: this.state.chatName
+                message: this.state.message
             }
             const chatEditId = parseInt(this.props.match.params.chatId)
 
@@ -36,12 +39,13 @@ export default class ChatForm extends Component {
             <React.Fragment>
                 <form className="chatForm">
                     <div className="form-group">
-                        <label htmlFor="chatName">chat name</label>
+                        <label htmlFor="message">chat name</label>
                         <input type="text" required="true"
                                className="form-control"
                                onChange={this.handleFieldChange}
-                               id="chatName"
-                               placeholder="chat name" />
+                               id="message"
+                               placeholder="Message"
+                               defaultValue={this.state.message} />
                     </div>
                     <button type="submit" onClick={this.editChat} className="btn btn-primary">Submit</button>
                 </form>

@@ -21,7 +21,7 @@ export default class ChatForm extends Component {
     constructNewChat = evt => {
         evt.preventDefault()
             const chat = {
-                name: this.state.message,
+                message: this.state.message,
             }
 
             // Create the chat and redirect user to chat list

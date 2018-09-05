@@ -23,11 +23,8 @@ export default class ChatList extends Component {
                             <div key={chat.id} className="card">
                                 <div className="card-body">
                                     <h5 className="card-title">
-                                        {chat.name}
+                                        {chat.message}
 
-                                        <button
-                                            onClick={() => this.props.deleteChat(chat.id, "chats")}
-                                            className="card-link">Delete</button>
                                         <button type="button"
                                             className="btn btn-success"
                                             onClick={() => {
@@ -35,6 +32,9 @@ export default class ChatList extends Component {
                                             }}>
                                             Edit Message
                                       </button>
+                                        <button
+                                            onClick={() => this.props.deleteChat(chat.id, "chats")}
+                                            className="card-link">Delete</button>
                                     </h5>
                                 </div>
                             </div>
