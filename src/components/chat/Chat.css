@@ -24,12 +24,3 @@
     justify-content: space-evenly;
     margin: 0 0 10px 0;
 }
-
-.rcw-conversation-container > .rcw-header {
-    background-color: red;
-  }
-   
-.rcw-message > .rcw-response {
-    background-color: black;
-    color: white;
-  }
