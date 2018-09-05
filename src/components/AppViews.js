@@ -2,6 +2,7 @@ import { Route, Redirect } from 'react-router-dom'
 import React, { Component } from "react"
 import Login from './Login'
 import DataManager from '../data/DataManager'
+import "./AppViews.css"
 
 import ArticleForm from './article/ArticleForm'
 import ArticleList from './article/ArticleList'
@@ -37,8 +38,16 @@ export default class AppViews extends Component {
         chats: [],
         events: [],
         friends: [],
-        tasks: []
+        tasks: [],
+        users: []
     }
+
+    addUser = (user, link) => DataManager.post(user, link)
+        .then(users => this.setState({
+            users: users
+        }))
+    
+
 
     addArticle = (article, link) => DataManager.post(article, link)
         .then(() => DataManager.getAll("articles"))
@@ -79,7 +88,7 @@ export default class AppViews extends Component {
         .then(events => this.setState({
             events: events
         }))
-    deletEvent = (id, link) => DataManager.removeAndList(id, link)
+    deleteEvent = (id, link) => DataManager.removeAndList(id, link)
         .then(() => DataManager.getAll("events"))
         .then(events => this.setState({
             events: events
@@ -118,38 +127,26 @@ export default class AppViews extends Component {
         }))
 
     componentDidMount() {
-        DataManager.getAll("articles").then(allArticles => {
-            this.setState({
-                articles: allArticles
-            })
-        })
-        DataManager.getAll("chats").then(allChat => {
-            this.setState({
-                chat: allChat
-            })
-        })
-        DataManager.getAll("events").then(allEvents => {
-            this.setState({
-                events: allEvents
-            })
-        })
-        DataManager.getAll("tasks").then(allTasks => {
-            this.setState({
-                tasks: allTasks
-            })
-        })
-        DataManager.getAll("friends").then(allFriends => {
-            this.setState({
-                friends: allFriends
-            })
-        })
+        const _state = {}
+        DataManager.getAll("articles").then(articles => _state.articles = articles)
+        .then(() => DataManager.getAll("chats").then(chats => _state.chats = chats))
+        .then(() => DataManager.getAll("events").then(events => _state.events = events))
+        .then(() => DataManager.getAll("tasks").then(tasks => _state.tasks = tasks))
+        .then(() => DataManager.getAll("friends").then(friends => _state.friends = friends))
+        .then(() => {this.setState(_state)})
     }
 
 
     render() {
         return (
+            <div className="viewArea">
             <React.Fragment>
-                    <Route path="/login" component={Login} />
+                    {/* <Route path="/login" component={Login} /> */}
+
+                    <Route path="/login" render={(props) => {
+                        return <Login {...props}
+                            addUser={this.addUser}/>
+                    }} />
 
 
                     <Route exact path="/articles" render={(props) => {
@@ -196,7 +193,7 @@ export default class AppViews extends Component {
                         if (this.isAuthenticated()) {
                             return <EventList {...props}
                                 events={this.state.events}
-                                deleteEvent={this.deleteEvent} />
+                                deleteEvent={this.deleteEvent}/>
                         } else {
                             return <Redirect to="/login" />
                     }} }/>
@@ -243,6 +240,7 @@ export default class AppViews extends Component {
                             editFriend={this.editFriend}/>
                     }} />
                 </React.Fragment>
+                </div>
         )
     }
 

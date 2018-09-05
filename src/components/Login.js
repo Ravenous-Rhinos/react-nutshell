@@ -33,6 +33,16 @@ export default class Login extends Component {
         )
     }
 
+    constructNewUser = evt => {
+        evt.preventDefault()
+            const user = {
+                inputEmail: this.state.email,
+                inputPassword: this.state.password,
+            }
+
+            this.props.addUser(user, "users").then(() => this.props.history.push("/"))
+        }
+
     render() {
         return (
             <form onSubmit={this.handleLogin}>
@@ -51,8 +61,11 @@ export default class Login extends Component {
                        id="password"
                        placeholder="Password"
                        required="" />
+                <button type="submit" onClick={this.constructNewUser}>
+                    Register
+                </button>
                 <button type="submit">
-                    Sign in
+                    Sign In
                 </button>
             </form>
         )
