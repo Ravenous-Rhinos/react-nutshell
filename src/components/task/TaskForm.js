@@ -4,8 +4,7 @@ export default class TaskForm extends Component {
     // Set initial state
     state = {
         task: "",
-        details: "",
-        due: "",
+        date: "",
     }
 
     // Update state whenever an input field is edited
@@ -25,7 +24,8 @@ export default class TaskForm extends Component {
             window.alert("Please add a new task")
         } else {
             const newTask = {
-                name: this.state.task,
+                task: this.state.task,
+                date: this.state.date
             }
 
             // Create the employee and redirect user to employee list
@@ -48,7 +48,7 @@ export default class TaskForm extends Component {
                             <input type="date" required="true"
                             className="form-control"
                             onChange={this.handleFieldChange}
-                            id="task"
+                            id="date"
                             placeholder="By" />
                     </div>
 

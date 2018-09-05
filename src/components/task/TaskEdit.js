@@ -3,9 +3,8 @@ import React, { Component } from "react"
 export default class TaskEdit extends Component {
     // Set initial state
     state = {
-        name: "",
-        details: '',
-        due: ''
+        task: "",
+        date: ''
     }
 
     // Update state whenever an input field is edited
@@ -23,8 +22,8 @@ export default class TaskEdit extends Component {
         evt.preventDefault()
 
             const task = {
-                name: this.state.task,
-                details: this.state.details,
+                task: this.state.task,
+                date: this.state.date,
             }
             const taskEditId = parseInt(this.props.match.params.taskId)
             // Create the animal and redirect user to animal list
@@ -43,6 +42,12 @@ export default class TaskEdit extends Component {
                                onChange={this.handleFieldChange}
                                id="task"
                                placeholder="Edit" />
+
+                               <input type="date" required="true"
+                            className="form-control"
+                            onChange={this.handleFieldChange}
+                            id="date"
+                            placeholder="By" />
                     </div>
                     <button type="submit" onClick={this.editTask} className="btn btn-primary">Edit</button>
                 </form>

@@ -131,31 +131,13 @@ export default class AppViews extends Component {
 
 
     componentDidMount() {
-        DataManager.getAll("articles").then(allArticles => {
-            this.setState({
-                articles: allArticles
-            })
-        })
-        DataManager.getAll("chats").then(allChat => {
-            this.setState({
-                chat: allChat
-            })
-        })
-        DataManager.getAll("events").then(allEvents => {
-            this.setState({
-                events: allEvents
-            })
-        })
-        DataManager.getAll("tasks").then(allTasks => {
-            this.setState({
-                tasks: allTasks
-            })
-        })
-        DataManager.getAll("friends").then(allFriends => {
-            this.setState({
-                friends: allFriends
-            })
-        })
+        const _state = {}
+        DataManager.getAll("articles").then(articles => _state.articles = articles)
+        .then(() => DataManager.getAll("chats").then(chats => _state.chats = chats))
+        .then(() => DataManager.getAll("events").then(events => _state.events = events))
+        .then(() => DataManager.getAll("tasks").then(tasks => _state.tasks = tasks))
+        .then(() => DataManager.getAll("friends").then(friends => _state.friends = friends))
+        .then(() => {this.setState(_state)})
     }
 
 
