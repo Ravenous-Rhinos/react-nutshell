@@ -161,8 +161,8 @@ export default class AppViews extends Component {
                     <Route exact path="/articles" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <ArticleList {...props}
-                                articles={this.state.articles}
-                                deleteArticle={this.deleteArticle} />
+                                deleteArticle={this.deleteArticle}
+                                articles={this.state.articles} />
                         } else {
                             return <Redirect to="/login" />
                         }
