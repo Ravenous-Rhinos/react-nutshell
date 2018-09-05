@@ -3,10 +3,6 @@ import React, { Component } from "react"
 import Login from './Login'
 import DataManager from '../data/DataManager'
 import "./AppViews.css"
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 import ArticleForm from './article/ArticleForm'
 import ArticleList from './article/ArticleList'
@@ -144,7 +140,6 @@ export default class AppViews extends Component {
     render() {
         return (
             <div className="viewArea">
-<<<<<<< HEAD
             <React.Fragment>
                     {/* <Route path="/login" component={Login} /> */}
 
@@ -152,10 +147,6 @@ export default class AppViews extends Component {
                         return <Login {...props}
                             addUser={this.addUser}/>
                     }} />
-=======
-                <React.Fragment>
-                    <Route path="/login" component={Login} />
->>>>>>> master
 
                     <Route exact path="/articles" render={(props) => {
                         if (this.isAuthenticated()) {
@@ -252,11 +243,7 @@ export default class AppViews extends Component {
                             editFriend={this.editFriend} />
                     }} />
                 </React.Fragment>
-<<<<<<< HEAD
                 </div>
-=======
-            </div>
->>>>>>> master
         )
     }
 
