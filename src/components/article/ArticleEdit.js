@@ -4,6 +4,7 @@ import React, { Component } from "react"
 export default class ArticleEdit extends Component {
     state = {
         name: "",
+        date: "",
         link: "",
         content: "",
         id: null
@@ -14,12 +15,6 @@ export default class ArticleEdit extends Component {
         this.setState(article);
     }
 
-    // componentWillUnmount() {
-    //     const article = this.props.articles.find(a => a.id === parseInt(this.props.match.params.articleId))
-    //     this.setState(article);
-    // }
-
-    // Update state whenever an input field is edited
     handleFieldChange = evt => {
         const stateToChange = {}
         stateToChange[evt.target.id] = evt.target.value
@@ -30,6 +25,7 @@ export default class ArticleEdit extends Component {
         evt.preventDefault()
         const newArticle = {
             name: this.state.name,
+            date: this.state.date,
             link: this.state.link,
             content: this.state.content,
             id: this.state.id
@@ -51,7 +47,16 @@ export default class ArticleEdit extends Component {
                             placeholder="Article Title"
                             defaultValue={this.state.name} />
                     </div>
-                    <div className="articleLink">
+                    <div className="form-group">
+                        <label htmlFor="articleDate">Article Date:</label>
+                        <input require type="date" required="true"
+                            className="form-control"
+                            onChange={this.handleFieldChange.bind(this)}
+                            id="date"
+                            placeholder="Article Date"
+                            defaultValue={this.state.date} />
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="articleLink">Article Link:</label>
                         <input type="text" required="true"
                             className="form-control"
@@ -62,7 +67,7 @@ export default class ArticleEdit extends Component {
                     </div>
                     <p></p>
                     <div className="form-group">
-                        <label htmlFor="article">Article Content:</label>
+                        <label htmlFor="articleContent">Article Content:</label>
                         <input type="text" required="true"
                             className="form-control"
                             onChange={this.handleFieldChange.bind(this)}

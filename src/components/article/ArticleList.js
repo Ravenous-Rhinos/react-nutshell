@@ -14,6 +14,9 @@ export default class ArticleList extends Component {
                                 <h4 className="card-title" className="article-name">
                                     {article.name}
                                 </h4>
+                                <h5 className="card-title" className="article-date">
+                                    {article.date}
+                                </h5>
                                 <hr></hr>
                                 <a href={article.link} title="Link to Article">Link to Article</a>
                                 <p></p>

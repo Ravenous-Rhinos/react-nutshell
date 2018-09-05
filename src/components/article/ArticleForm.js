@@ -4,7 +4,8 @@ import React, { Component } from "react"
 export default class ArticleForm extends Component {
     state = {
         articleName: "",
-        articleContent: ""
+        articleContent: "",
+        articleDate: ""
     }
 
     handleFieldChange = evt => {
@@ -46,6 +47,15 @@ export default class ArticleForm extends Component {
                             onChange={this.handleFieldChange}
                             id="articleName"
                             placeholder="Article Title" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="articleDate">Article Date:</label>
+                        <input require type="date" required="true"
+                            className="form-control"
+                            onChange={this.handleFieldChange.bind(this)}
+                            id="date"
+                            placeholder="Article Date"
+                            defaultValue={this.state.date} />
                     </div>
                     <div className="articleLink">
                         <label htmlFor="articleLink">Article Link:</label>
