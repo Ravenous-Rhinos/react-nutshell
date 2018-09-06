@@ -16,7 +16,30 @@
     }
   ],
   "chats": [],
-  "events": [],
+  "events": [
+    {
+      "eventName": "Kelly Cook",
+      "eventDetail": "qeytfgc",
+      "id": 1
+    },
+    {
+      "eventName": "Kelly Cook",
+      "eventDetail": "hey",
+      "id": 2
+    },
+    {
+      "eventName": "Cat!",
+      "eventDetail": "jvknkh",
+      "id": 3
+    }
+  ],
   "tasks": [],
-  "friends": []
+  "friends": [],
+  "users": [
+    {
+      "inputEmail": "test@me.com",
+      "inputPassword": "123",
+      "id": 1
+    }
+  ]
 }
