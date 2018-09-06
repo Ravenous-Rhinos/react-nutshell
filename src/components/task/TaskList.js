@@ -22,17 +22,21 @@ class TaskList extends Component {
                             <div key={task.id} className="card">
                                 <div className="card-body">
                                     <div className="card-title">
-                                        {task.task}
-                                        <div>
+                                    
+                                        <div className='task-name'>
+                                            {task.task}
+                                        </div>
+                                        <div className='task-date'>
                                             {task.date}
                                         </div>
-                                        <div>
+
+                                        <div className='edit-button'>
                                             <a href="#"
                                                 onClick={() => { this.props.history.push(`/tasks/edit/${task.id}`) }}
                                                 className="card-link">Edit</a>
                                         </div>
 
-                                        <div>
+                                        <div className='delete-button'>
                                             <a href="#"
                                                 onClick={() => this.props.deleteTask(task.id, 'tasks')}
                                                 className="card-link">Delete</a>
