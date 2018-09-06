@@ -1,11 +1,15 @@
 import React, { Component } from "react"
 import "./Event.css"
+// import DataManager from "../data/DataManager"
+
 
 export default class EventForm extends Component {
     // Set initial state
+    
     state = {
         name: "",
         detail: "",
+        user: "",
     }
 
     // Update state whenever an input field is edited
@@ -20,8 +24,10 @@ export default class EventForm extends Component {
         invoking the function reference passed from parent component
      */
     constructNewEvent = evt => {
-        evt.preventDefault()
+        // let user = JSON.parse(sessionStorage.getItem("credentials"))
+        // evt.preventDefault()
             const event = {
+                user: this.state.users.id,
                 eventName: this.state.name,
                 eventDetail: this.state.detail,
             }
