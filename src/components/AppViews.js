@@ -2,6 +2,7 @@ import { Route, Redirect } from 'react-router-dom'
 import React, { Component } from "react"
 import Login from './Login'
 import DataManager from '../data/DataManager'
+import "./AppViews.css"
 
 import ArticleForm from './article/ArticleForm'
 import ArticleList from './article/ArticleList'
@@ -37,10 +38,16 @@ export default class AppViews extends Component {
         chats: [],
         events: [],
         friends: [],
-        tasks: []
+        tasks: [],
+        users: []
     }
 // ARTICLES
     addArticle = (article, link) => DataManager.post(article, link)
+        .then(() => DataManager.getAll("articles"))
+        .then(articles => this.setState({
+            articles: articles
+        }))
+    editArticle = (article, id, link) => DataManager.put(article, id, link)
         .then(() => DataManager.getAll("articles"))
         .then(articles => this.setState({
             articles: articles
@@ -83,7 +90,7 @@ export default class AppViews extends Component {
         .then(events => this.setState({
             events: events
         }))
-    deletEvent = (id, link) => DataManager.removeAndList(id, link)
+    deleteEvent = (id, link) => DataManager.removeAndList(id, link)
         .then(() => DataManager.getAll("events"))
         .then(events => this.setState({
             events: events
@@ -144,6 +151,7 @@ export default class AppViews extends Component {
     render() {
         return (
             <React.Fragment>
+            <div className="viewArea">
                 <Route path="/login" component={Login} />
 
             {/* ARTICLES */}
@@ -248,6 +256,7 @@ export default class AppViews extends Component {
                     return <FriendEdit {...props}
                         editFriend={this.editFriend} />
                 }} />
+                </div>
             </React.Fragment>
         )
     }
