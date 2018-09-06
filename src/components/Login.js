@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-
+import DataManager from "../data/DataManager"
 
 export default class Login extends Component {
 
@@ -24,14 +24,36 @@ export default class Login extends Component {
             For now, just store the email and password that
             the customer enters into local storage.
         */
-        sessionStorage.setItem(
-            "credentials",
-            JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
+        let email = this.state.email;
+        let password = this.state.password;
+        DataManager.getAll("users")
+            .then(users => {
+                let loginUser = users.find(u => u.inputEmail === email && u.inputPassword === password)
+                if(loginUser){
+                    sessionStorage.setItem(
+                        "credentials",
+                        JSON.stringify({
+                            email: this.state.email,
+                            password: this.state.password
+                        })
+                    )
+                    this.props.history.push("/events")
+                } else {
+                    alert("No user found, please register!")
+                }
             })
-        )
     }
+
+    constructNewUser = evt => {
+        evt.preventDefault()
+        const user = {
+            inputEmail: this.state.email,
+            inputPassword: this.state.password,
+        }
+
+        this.props.addUser(user, "users").then(() => this.props.history.push("/"))
+    }
+
 
     render() {
         return (
@@ -41,18 +63,21 @@ export default class Login extends Component {
                     Email address
                 </label>
                 <input onChange={this.handleFieldChange} type="email"
-                       id="email"
-                       placeholder="Email address"
-                       required="" autoFocus="" />
+                    id="email"
+                    placeholder="Email address"
+                    required="" autoFocus="" />
                 <label htmlFor="inputPassword">
                     Password
                 </label>
                 <input onChange={this.handleFieldChange} type="password"
-                       id="password"
-                       placeholder="Password"
-                       required="" />
-                <button type="submit">
-                    Sign in
+                    id="password"
+                    placeholder="Password"
+                    required="" />
+                <button type="submit" onClick={this.constructNewUser}>
+                    Register
+                </button>
+                <button type="submit" onClick={this.handleLogin}>
+                    Sign In
                 </button>
             </form>
         )
