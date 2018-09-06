@@ -36,7 +36,7 @@ export default class ArticleEdit extends Component {
     render() {
         return (
             <React.Fragment>
-                <h4 className="edit-post">Edit Post</h4>
+                <h3 className="edit-post">Edit Post</h3>
                 <form className="articleForm">
                     <div className="form-group">
                         <label htmlFor="articleName" className="article-title">Article Title:</label>
