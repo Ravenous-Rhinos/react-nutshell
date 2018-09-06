@@ -4,9 +4,9 @@ import { BrowserRouter as Router } from "react-router-dom"
 import Nutshell from './components/Nutshell';
 import App from './App'
 
-import './index.css';
+// import './index.css';
 
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
     <Router>
@@ -15,6 +15,6 @@ ReactDOM.render(
         <Nutshell />
         </div>
     </Router>
-    , document.getElementById('root'));
+    ,document.getElementById('root'));
 
-registerServiceWorker();
+// registerServiceWorker();

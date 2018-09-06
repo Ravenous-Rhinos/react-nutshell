@@ -54,6 +54,11 @@ export default class AppViews extends Component {
         .then(articles => this.setState({
             articles: articles
         }))
+    editArticle = (article, id, link) => DataManager.put(article, id, link)
+        .then(() => DataManager.getAll("articles"))
+        .then(articles => this.setState({
+            articles: articles
+        }))
     deleteArticle = (id, link) => DataManager.removeAndList(id, link)
         .then(() => DataManager.getAll("articles"))
         .then(articles => this.setState({
@@ -76,7 +81,6 @@ export default class AppViews extends Component {
         .then(chats => this.setState({
             chats: chats
         }))
-
 
     addEvent = (event, link) => DataManager.post(event, link)
         .then(() => DataManager.getAll("events"))
@@ -151,13 +155,12 @@ export default class AppViews extends Component {
                     <Route exact path="/articles" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <ArticleList {...props}
-                                articles={this.state.articles}
-                                deleteArticle={this.deleteArticle} />
+                                deleteArticle={this.deleteArticle}
+                                articles={this.state.articles} />
                         } else {
                             return <Redirect to="/login" />
                         }
                     }} />
-
                     <Route path="/articles/new" render={(props) => {
                         return <ArticleForm {...props}
                             addArticle={this.addArticle} />

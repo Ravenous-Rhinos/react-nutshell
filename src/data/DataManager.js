@@ -28,7 +28,8 @@ export default Object.create(null, {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(newItem)
-            }).then(e => e.json())
+            })
+                .then(e => e.json())
                 .then(() => this.getAll(link))
         }
     },

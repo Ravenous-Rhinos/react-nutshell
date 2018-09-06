@@ -8,8 +8,8 @@ export default class EventForm extends Component {
     
     state = {
         name: "",
-        detail: "",
-        user: "",
+        detail: ""
+        // user: "",
     }
 
     // Update state whenever an input field is edited
@@ -25,9 +25,9 @@ export default class EventForm extends Component {
      */
     constructNewEvent = evt => {
         // let user = JSON.parse(sessionStorage.getItem("credentials"))
-        // evt.preventDefault()
+        evt.preventDefault()
             const event = {
-                user: this.state.users.id,
+                // user: this.state.users.id,
                 eventName: this.state.name,
                 eventDetail: this.state.detail,
             }
