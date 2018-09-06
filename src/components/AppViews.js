@@ -4,7 +4,6 @@ import Login from './Login'
 import DataManager from '../data/DataManager'
 import "./AppViews.css"
 
-
 import ArticleForm from './article/ArticleForm'
 import ArticleList from './article/ArticleList'
 import ArticleEdit from './article/ArticleEdit'
@@ -39,8 +38,16 @@ export default class AppViews extends Component {
         chats: [],
         events: [],
         friends: [],
-        tasks: []
+        tasks: [],
+        users: []
     }
+
+    addUser = (user, link) => DataManager.post(user, link)
+        .then(users => this.setState({
+            users: users
+        }))
+    
+
 
     addArticle = (article, link) => DataManager.post(article, link)
         .then(() => DataManager.getAll("articles"))
@@ -137,8 +144,13 @@ export default class AppViews extends Component {
     render() {
         return (
             <div className="viewArea">
-                <React.Fragment>
-                    <Route path="/login" component={Login} />
+            <React.Fragment>
+                    {/* <Route path="/login" component={Login} /> */}
+
+                    <Route path="/login" render={(props) => {
+                        return <Login {...props}
+                            addUser={this.addUser}/>
+                    }} />
 
                     <Route exact path="/articles" render={(props) => {
                         if (this.isAuthenticated()) {
@@ -184,7 +196,7 @@ export default class AppViews extends Component {
                         if (this.isAuthenticated()) {
                             return <EventList {...props}
                                 events={this.state.events}
-                                deleteEvent={this.deleteEvent} />
+                                deleteEvent={this.deleteEvent}/>
                         } else {
                             return <Redirect to="/login" />
                         }
@@ -234,7 +246,7 @@ export default class AppViews extends Component {
                             editFriend={this.editFriend} />
                     }} />
                 </React.Fragment>
-            </div>
+                </div>
         )
     }
 

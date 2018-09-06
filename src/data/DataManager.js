@@ -43,5 +43,11 @@ export default Object.create(null, {
                 body: JSON.stringify(editItem)
             }).then(e => e.json())
         }
+    },
+    findUser: {
+        value: (email, password) => {
+            return fetch(`http://localhost:5002/users?inputEmail=${email}&inputPassword=${password}`)
+                .then(response => response.json())
+        }
     }
 })
