@@ -1,0 +1,16 @@
+.edit-post {
+    margin-left: 0.9em;
+    
+}
+
+.articleForm {
+    margin-right: 50%;
+}
+
+.article-title, .article-date, .articlelink, .article-content, .title-field, .date-field, .link-field, .content-field, .edited-post {
+    margin-left: 1.5em;
+}
+
+.edited-post {
+    margin-top: 1em;
+}

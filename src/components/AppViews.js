@@ -2,6 +2,7 @@ import { Route, Redirect } from 'react-router-dom'
 import React, { Component } from "react"
 import Login from './Login'
 import DataManager from '../data/DataManager'
+import "./AppViews.css"
 
 import ArticleForm from './article/ArticleForm'
 import ArticleList from './article/ArticleList'
@@ -37,10 +38,23 @@ export default class AppViews extends Component {
         chats: [],
         events: [],
         friends: [],
-        tasks: []
+        tasks: [],
+        users: []
     }
 
+    addUser = (user, link) => DataManager.post(user, link)
+        .then(users => this.setState({
+            users: users
+        }))
+    
+
+
     addArticle = (article, link) => DataManager.post(article, link)
+        .then(() => DataManager.getAll("articles"))
+        .then(articles => this.setState({
+            articles: articles
+        }))
+    editArticle = (article, id, link) => DataManager.put(article, id, link)
         .then(() => DataManager.getAll("articles"))
         .then(articles => this.setState({
             articles: articles
@@ -68,7 +82,6 @@ export default class AppViews extends Component {
             chats: chats
         }))
 
-
     addEvent = (event, link) => DataManager.post(event, link)
         .then(() => DataManager.getAll("events"))
         .then(events => this.setState({
@@ -79,7 +92,7 @@ export default class AppViews extends Component {
         .then(events => this.setState({
             events: events
         }))
-    deletEvent = (id, link) => DataManager.removeAndList(id, link)
+    deleteEvent = (id, link) => DataManager.removeAndList(id, link)
         .then(() => DataManager.getAll("events"))
         .then(events => this.setState({
             events: events
@@ -118,77 +131,64 @@ export default class AppViews extends Component {
         }))
 
     componentDidMount() {
-        DataManager.getAll("articles").then(allArticles => {
-            this.setState({
-                articles: allArticles
-            })
-        })
-        DataManager.getAll("chats").then(allChat => {
-            this.setState({
-                chat: allChat
-            })
-        })
-        DataManager.getAll("events").then(allEvents => {
-            this.setState({
-                events: allEvents
-            })
-        })
-        DataManager.getAll("tasks").then(allTasks => {
-            this.setState({
-                tasks: allTasks
-            })
-        })
-        DataManager.getAll("friends").then(allFriends => {
-            this.setState({
-                friends: allFriends
-            })
-        })
+        const _state = {}
+        DataManager.getAll("articles").then(articles => _state.articles = articles)
+        .then(() => DataManager.getAll("chats").then(chats => _state.chats = chats))
+        .then(() => DataManager.getAll("events").then(events => _state.events = events))
+        .then(() => DataManager.getAll("tasks").then(tasks => _state.tasks = tasks))
+        .then(() => DataManager.getAll("friends").then(friends => _state.friends = friends))
+        .then(() => {this.setState(_state)})
     }
 
 
     render() {
         return (
+            <div className="viewArea">
             <React.Fragment>
-                    <Route path="/login" component={Login} />
+                    {/* <Route path="/login" component={Login} /> */}
 
+                    <Route path="/login" render={(props) => {
+                        return <Login {...props}
+                            addUser={this.addUser}/>
+                    }} />
 
                     <Route exact path="/articles" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <ArticleList {...props}
-                                articles={this.state.articles}
-                                deleteArticle={this.deleteArticle} />
+                                deleteArticle={this.deleteArticle}
+                                articles={this.state.articles} />
                         } else {
                             return <Redirect to="/login" />
-                    }} }/>
-
+                        }
+                    }} />
                     <Route path="/articles/new" render={(props) => {
                         return <ArticleForm {...props}
-                            addArticle={this.addArticle}/>
+                            addArticle={this.addArticle} />
                     }} />
                     <Route path="/articles/edit/:articleId(\d+)" render={(props) => {
                         return <ArticleEdit {...props}
                             editArticle={this.editArticle}
-                            articles={this.state.articles}/>
+                            articles={this.state.articles} />
                     }} />
 
 
                     <Route exact path="/chats" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <ChatList {...props}
-                            deletechat={this.deletechat}
+                                deletechat={this.deletechat}
                                 chats={this.state.chats}
-                                />
+                            />
                         } else {
                             return <Redirect to="/login" />
                         }
                     }} />
                     <Route path="/chats/new" render={(props) => {
                         return <ChatForm {...props}
-                            addChat={this.addChat}/>
+                            addChat={this.addChat} />
                     }} />
                     <Route path="/chats/edit/:chatId(\d+)" render={(props) => {
                         return <ChatEdit {...props}
-                            editChat={this.editChat}/>
+                            editChat={this.editChat} />
                     }} />
 
 
@@ -196,17 +196,18 @@ export default class AppViews extends Component {
                         if (this.isAuthenticated()) {
                             return <EventList {...props}
                                 events={this.state.events}
-                                deleteEvent={this.deleteEvent} />
+                                deleteEvent={this.deleteEvent}/>
                         } else {
                             return <Redirect to="/login" />
-                    }} }/>
+                        }
+                    }} />
                     <Route path="/events/new" render={(props) => {
                         return <EventForm {...props}
-                            addEvent={this.addEvent}/>
+                            addEvent={this.addEvent} />
                     }} />
                     <Route path="/events/edit/:eventId(\d+)" render={(props) => {
                         return <EventEdit {...props}
-                            editEvent={this.editEvent}/>
+                            editEvent={this.editEvent} />
                     }} />
 
                     <Route exact path="/tasks" render={(props) => {
@@ -216,14 +217,15 @@ export default class AppViews extends Component {
                                 deleteTask={this.deleteTask} />
                         } else {
                             return <Redirect to="/login" />
-                    }} }/>
+                        }
+                    }} />
                     <Route path="/tasks/new" render={(props) => {
                         return <TaskForm {...props}
-                            addTask={this.addTask}/>
+                            addTask={this.addTask} />
                     }} />
                     <Route path="/tasks/edit/:taskId(\d+)" render={(props) => {
                         return <TaskEdit {...props}
-                            editTask={this.editTask}/>
+                            editTask={this.editTask} />
                     }} />
 
                     <Route exact path="/friends" render={(props) => {
@@ -233,16 +235,18 @@ export default class AppViews extends Component {
                                 deleteFriend={this.deleteFriend} />
                         } else {
                             return <Redirect to="/login" />
-                    }} }/>
+                        }
+                    }} />
                     <Route path="/friends/new" render={(props) => {
                         return <FriendForm {...props}
-                            addFriend={this.addFriend}/>
+                            addFriend={this.addFriend} />
                     }} />
                     <Route path="/friends/edit/:friendId(\d+)" render={(props) => {
                         return <FriendEdit {...props}
-                            editFriend={this.editFriend}/>
+                            editFriend={this.editFriend} />
                     }} />
                 </React.Fragment>
+                </div>
         )
     }
 
