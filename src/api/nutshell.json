@@ -1,10 +1,10 @@
 {
   "articles": [
     {
-      "name": "Giant Elephant Destroys Bank Office",
-      "date": "2018-12-30",
-      "link": "https://www.w3schools.com/html/html_links.asp",
-      "content": "In HTML 4.01, the <hr> tag represents a horizontal rule. However, the <hr> tag may still be displayed as a horizontal rule in visual browsers, but is now defined in semantic terms, rather than presentational terms. All the layout attributes are removed in HTML5. Use CSS instead.",
+      "name": "This Is A Test!",
+      "date": "2018-12-31",
+      "link": "https://getbootstrap.com/docs/4.0/components/dropdowns/",
+      "content": "I commented out the first button as I think I might be redundant.  One thing I would like to point up that <a> is in-line element. So you might get more than one <a> in the same line (in your case \"Action\" and \"Another action\" will display in the same line) . I recommend that you use <ul> and <li> to wrap <a> in the drop down menu list.  Rgds Sia",
       "id": 1
     }
   ],

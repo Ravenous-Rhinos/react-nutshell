@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-// import "./article.css"
+import "./ArticleForm.css"
 
 export default class ArticleForm extends Component {
     state = {
@@ -19,6 +19,9 @@ export default class ArticleForm extends Component {
         if (this.state.articleName === "") {
             window.alert("Please make sure to fill out all text fields before submitting!")
         }
+        else if (this.state.articleDate === "") {
+            window.alert("Please make sure to fill out all text fields before submitting!")
+        }
         else if (this.state.articleLink === "") {
             window.alert("Please make sure to fill out all text fields before submitting!")
         }
@@ -28,6 +31,7 @@ export default class ArticleForm extends Component {
         else {
             const article = {
                 name: this.state.articleName,
+                date: this.state.articleDate,
                 link: this.state.articleLink,
                 content: this.state.articleContent
             }
@@ -52,10 +56,9 @@ export default class ArticleForm extends Component {
                         <label htmlFor="articleDate">Article Date:</label>
                         <input require type="date" required="true"
                             className="form-control"
-                            onChange={this.handleFieldChange.bind(this)}
-                            id="date"
-                            placeholder="Article Date"
-                            defaultValue={this.state.date} />
+                            onChange={this.handleFieldChange}
+                            id="articleDate"
+                            placeholder="Article Date"/>
                     </div>
                     <div className="articleLink">
                         <label htmlFor="articleLink">Article Link:</label>

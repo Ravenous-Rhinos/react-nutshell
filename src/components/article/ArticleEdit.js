@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-// import "./Animal.css"
+import "./ArticleEdit.css"
 
 export default class ArticleEdit extends Component {
     state = {
@@ -36,30 +36,30 @@ export default class ArticleEdit extends Component {
     render() {
         return (
             <React.Fragment>
-                <h4>Edit Post</h4>
+                <h4 className="edit-post">Edit Post</h4>
                 <form className="articleForm">
                     <div className="form-group">
-                        <label htmlFor="articleName">Article Title:</label>
+                        <label htmlFor="articleName" className="article-title">Article Title:</label>
                         <input type="text" required="true"
-                            className="form-control"
+                            className="form-control title-field"
                             onChange={this.handleFieldChange.bind(this)}
                             id="name"
                             placeholder="Article Title"
                             defaultValue={this.state.name} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="articleDate">Article Date:</label>
+                        <label htmlFor="articleDate" className="article-date">Article Date:</label>
                         <input require type="date" required="true"
-                            className="form-control"
+                            className="form-control date-field"
                             onChange={this.handleFieldChange.bind(this)}
                             id="date"
                             placeholder="Article Date"
                             defaultValue={this.state.date} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="articleLink">Article Link:</label>
+                        <label htmlFor="articleLink" className="articlelink">Article Link:</label>
                         <input type="text" required="true"
-                            className="form-control"
+                            className="form-control link-field"
                             onChange={this.handleFieldChange.bind(this)}
                             id="link"
                             placeholder="Article Link"
@@ -67,16 +67,16 @@ export default class ArticleEdit extends Component {
                     </div>
                     <p></p>
                     <div className="form-group">
-                        <label htmlFor="articleContent">Article Content:</label>
+                        <label htmlFor="articleContent" className="article-content">Article Content:</label>
                         <input type="text" required="true"
-                            className="form-control"
+                            className="form-control content-field"
                             onChange={this.handleFieldChange.bind(this)}
                             id="content"
                             placeholder="Article Content"
                             defaultValue={this.state.content}/>
                     </div>
                     <button type="submit" onClick={this.createNewArticle}
-                        className="btn btn-primary">Submit Edited Post</button>
+                        className="btn btn-primary edited-post">Submit Edited Post</button>
                 </form>
             </React.Fragment>
         )
