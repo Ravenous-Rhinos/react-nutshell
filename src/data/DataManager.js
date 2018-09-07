@@ -45,6 +45,11 @@ export default Object.create(null, {
             .then(() => this.getAll(link))
         }
     },
+    getAllArticles: {
+        value: () => {
+            return fetch("http://localhost:5002/articles?_order=desc&_sort=date").then(r => r.json())
+        }
+    },
     findUser: {
         value: (email, password) => {
             return fetch(`http://localhost:5002/users?inputEmail=${email}&inputPassword=${password}`)

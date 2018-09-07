@@ -49,7 +49,7 @@ export default class AppViews extends Component {
 
     // ARTICLES
     addArticle = (article, link) => DataManager.post(article, link)
-        .then(() => DataManager.getAll("articles"))
+        .then(() => DataManager.getAllArticles("articles"))
         .then(articles => this.setState({
             articles: articles
         }))
