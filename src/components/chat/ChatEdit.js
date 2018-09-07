@@ -9,7 +9,7 @@ export default class ChatForm extends Component {
     }
 
     componentDidMount() {
-        const message = this.props.chats.find(a => a.id === parseInt(this.props.match.params.chatId))
+        const message = this.props.chats.find(a => a.id === parseInt(this.props.match.params.chatId, 0))
         this.setState(message);
         const date = this.props.chats.find(a => a.id === parseInt(this.props.match.params.chatId))
         this.setState(date);

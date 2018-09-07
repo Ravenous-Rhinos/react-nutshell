@@ -112,8 +112,6 @@ export default class AppViews extends Component {
         .then(tasks => this.setState({
             tasks: tasks
         }))
-
-
     deleteTask = (id, link) => DataManager.removeAndList(id, link)
         .then(() => DataManager.getAll("tasks"))
         .then(tasks => this.setState({
