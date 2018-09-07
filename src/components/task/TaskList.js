@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import './Task.css'
 
 
 class TaskList extends Component {
@@ -13,7 +13,7 @@ class TaskList extends Component {
                             this.props.history.push("/tasks/new")
                         }
                         }>
-                        Add Task
+                       Add New Task
                 </button>
                 </div>
                 <section className="tasks">
@@ -24,10 +24,11 @@ class TaskList extends Component {
                                     <div className="card-title">
                                     
                                         <div className='task-name'>
-                                            {task.task}
+                                          <h2>  {task.task} </h2>
                                         </div>
                                         <div className='task-date'>
-                                            {task.date}
+                                        <h5> Finish it by... </h5>
+                                           <h6> <b>{task.date}</b> </h6>
                                         </div>
 
                                         <div className='edit-button'>
@@ -39,7 +40,7 @@ class TaskList extends Component {
                                         <div className='delete-button'>
                                             <a href="#"
                                                 onClick={() => this.props.deleteTask(task.id, 'tasks')}
-                                                className="card-link">Delete</a>
+                                                className="card-link"><em>Done</em></a>
                                         </div>
 
                                     </div>

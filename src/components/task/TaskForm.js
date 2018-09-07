@@ -43,7 +43,7 @@ export default class TaskForm extends Component {
                             className="form-control"
                             onChange={this.handleFieldChange}
                             id="task"
-                            placeholder="ummmm...." />
+                            placeholder="Add New Task" />
                             
                             <input type="date" required="true"
                             className="form-control"
