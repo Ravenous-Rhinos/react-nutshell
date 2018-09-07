@@ -5,6 +5,15 @@ import "./Chat.css"
 
 
 export default class ChatList extends Component {
+
+    getUserName = chat => {
+        console.log(chat)
+        let user = this.props.users.find(user => {
+            console.log(user)
+            return user.id === chat.userId
+        })
+        return user.inputEmail
+    }
     render() {
         return (
             <React.Fragment>
@@ -22,8 +31,8 @@ export default class ChatList extends Component {
                         this.props.chats.map(chat =>
                             <div key={chat.id} className="card">
                                 <div className="card-body">
+                                    {this.getUserName(chat)}
                                     <h5 className="card-title">
-
                                         {chat.message}
                                     </h5>
                                     <p>

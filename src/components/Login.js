@@ -34,7 +34,8 @@ export default class Login extends Component {
                         "credentials",
                         JSON.stringify({
                             email: this.state.email,
-                            password: this.state.password
+                            password: this.state.password,
+                            id: loginUser.id
                         })
                     )
                     this.props.history.push("/events")

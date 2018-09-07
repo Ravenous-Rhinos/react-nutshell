@@ -23,7 +23,8 @@ export default class ChatForm extends Component {
         evt.preventDefault()
             const chat = {
                 message: this.state.message,
-                date: this.state.date
+                date: this.state.date,
+                userId: JSON.parse(sessionStorage.getItem("credentials")).id
 
             }
 
@@ -42,6 +43,7 @@ export default class ChatForm extends Component {
                                onChange={this.handleFieldChange}
                                id="message"
                                placeholder="Message" />
+                        <label htmlFor="date">Date</label>
                         <input type="date" required="true"
                                className="form-control"
                                onChange={this.handleFieldChange}
