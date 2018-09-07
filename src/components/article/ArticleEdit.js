@@ -76,7 +76,7 @@ export default class ArticleEdit extends Component {
                             defaultValue={this.state.content}/>
                     </div>
                     <button type="submit" onClick={this.createNewArticle}
-                        className="btn btn-primary edited-post">Submit Edited Post</button>
+                        className="btn btn-success edited-post">Submit Edited Post</button>
                 </form>
             </React.Fragment>
         )
