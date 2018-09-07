@@ -25,7 +25,7 @@ export default class TaskEdit extends Component {
                 task: this.state.task,
                 date: this.state.date,
             }
-            const taskEditId = parseInt(this.props.match.params.taskId)
+            const taskEditId = parseInt(this.props.match.params.taskId, 0)
             // Create the animal and redirect user to animal list
             this.props.editTask(task, taskEditId, 'tasks').then(() => this.props.history.push("/tasks"))
         }

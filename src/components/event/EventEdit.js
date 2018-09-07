@@ -15,7 +15,8 @@ export default class EventEdit extends Component {
 
     state = {
         name: "",
-        detail: ""
+        detail: "",
+        date: ""
     }
 
     // Update state whenever an input field is edited
@@ -34,6 +35,7 @@ export default class EventEdit extends Component {
         const event = {
             eventName: this.state.name,
             eventDetail: this.state.detail,
+            eventDate: this.state.date
         }
         const eventEditId = parseInt(this.props.match.params.eventId, 0)
         // Create the event and redirect user to event list
@@ -59,6 +61,14 @@ export default class EventEdit extends Component {
                                onChange={this.handleFieldChange.bind(this)}
                                id="detail" placeholder="Event Detail"
                                defaultValue={this.state.eventDetail}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="eventDate">Event Date</label>
+                        <input type="date" required="true"
+                            className="form-control"
+                            onChange={this.handleFieldChange}
+                            id="eventDate"
+                            placeholder="Event Date"/>
                     </div>
                     <button type="submit" onClick={this.constructNewEvent} className="btn btn-primary">Submit</button>
                 </form>
