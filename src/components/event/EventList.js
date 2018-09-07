@@ -25,12 +25,13 @@ export default class EventList extends Component {
                             <div key={event.id} className="card">
                                 <div className="card-body">
                                     <h5 className="card-title">
-                                        {event.eventName}
-                                        {event.eventDetail}
+                                        <h2>{event.eventName}</h2>
+                                        <p>{event.eventDetail}</p>
+                                        <p>{event.eventDate}</p>
                                         <Link className="nav-link" to={`/events/edit/${event.id}`}>Edit</Link>
-                                        <button><a
+                                        <button type="button" className="btn btn-success"
                                             onClick={() => this.props.deleteEvent(event.id, "events")}
-                                            className="card-link">Delete</a></button>
+                                            >Delete</button>
                                     </h5>
                                 </div>
                             </div>

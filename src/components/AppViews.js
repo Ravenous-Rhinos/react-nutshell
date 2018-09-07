@@ -47,7 +47,7 @@ export default class AppViews extends Component {
             users: users
         }))
 
-    // ARTICLES
+    // ARTICLES. getAllArticles is used because I (Kelly) wanted to have them display is descending order by date. Couldn't figure out how to the other way.
     addArticle = (article, link) => DataManager.post(article, link)
         .then(() => DataManager.getAllArticles("articles"))
         .then(articles => this.setState({
@@ -112,8 +112,6 @@ export default class AppViews extends Component {
         .then(tasks => this.setState({
             tasks: tasks
         }))
-
-
     deleteTask = (id, link) => DataManager.removeAndList(id, link)
         .then(() => DataManager.getAll("tasks"))
         .then(tasks => this.setState({
@@ -147,6 +145,7 @@ export default class AppViews extends Component {
             .then(() => DataManager.getAll("events").then(events => _state.events = events))
             .then(() => DataManager.getAll("tasks").then(tasks => _state.tasks = tasks))
             .then(() => DataManager.getAll("friends").then(friends => _state.friends = friends))
+            .then(() => DataManager.getAll("users").then(users => _state.users = users))
             .then(() => { this.setState(_state) })
     }
 
@@ -189,6 +188,8 @@ export default class AppViews extends Component {
                             return <ChatList {...props}
                                 deleteChat={this.deleteChat}
                                 chats={this.state.chats}
+                                addUser={this.addUser}
+                                users={this.state.users}
                             />
                         } else {
                             return <Redirect to="/login" />
@@ -196,12 +197,16 @@ export default class AppViews extends Component {
                     }} />
                     <Route path="/chats/new" render={(props) => {
                         return <ChatForm {...props}
-                            addChat={this.addChat} />
+                        addUser={this.addUser}
+                        addChat={this.addChat} />
+
                     }} />
                     <Route path="/chats/edit/:chatId(\d+)" render={(props) => {
                         return <ChatEdit {...props}
                             chats={this.state.chats}
-                            editChat={this.editChat} />
+                            editChat={this.editChat} 
+                            addUser={this.addUser}
+                            />
                     }} />
 
 

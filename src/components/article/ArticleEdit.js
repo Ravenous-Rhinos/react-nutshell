@@ -11,7 +11,7 @@ export default class ArticleEdit extends Component {
     }
 
     componentDidMount() {
-        const article = this.props.articles.find(a => a.id === parseInt(this.props.match.params.articleId))
+        const article = this.props.articles.find(a => a.id === parseInt(this.props.match.params.articleId, 0))
         this.setState(article);
     }
 
@@ -76,7 +76,7 @@ export default class ArticleEdit extends Component {
                             defaultValue={this.state.content}/>
                     </div>
                     <button type="submit" onClick={this.createNewArticle}
-                        className="btn btn-primary edited-post">Submit Edited Post</button>
+                        className="btn btn-success edited-post">Submit Edited Post</button>
                 </form>
             </React.Fragment>
         )
