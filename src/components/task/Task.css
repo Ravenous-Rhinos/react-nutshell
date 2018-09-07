@@ -21,10 +21,11 @@ font-family: 'Times New Roman', Times, serif
 }
 
 .delete-button{
-    text-align: center;
     font-size: 25px;
-    font-family: 'Times New Roman', Times, serif
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(74, 171, 74);
 }
+
 
 .card-body{
     min-width: auto;
