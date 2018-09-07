@@ -4,7 +4,8 @@ import "./Chat.css"
 export default class ChatForm extends Component {
     // Set initial state
     state = {
-        message: ""
+        message: "",
+        date: null
     }
 
     // Update state whenever an input field is edited
@@ -22,6 +23,8 @@ export default class ChatForm extends Component {
         evt.preventDefault()
             const chat = {
                 message: this.state.message,
+                date: this.state.date
+
             }
 
             // Create the chat and redirect user to chat list
@@ -33,12 +36,17 @@ export default class ChatForm extends Component {
             <React.Fragment>
                 <form className="chatForm">
                     <div className="form-group">
-                        <label htmlFor="message">chat name</label>
+                        <label htmlFor="message">Message</label>
                         <input type="text" required="true"
                                className="form-control"
                                onChange={this.handleFieldChange}
                                id="message"
                                placeholder="Message" />
+                        <input type="date" required="true"
+                               className="form-control"
+                               onChange={this.handleFieldChange}
+                               id="date"
+                               placeholder="Date" />
                     </div>
                     <button type="submit" onClick={this.constructNewChat} className="btn btn-primary">Submit</button>
                 </form>

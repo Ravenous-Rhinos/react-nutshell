@@ -189,6 +189,7 @@ export default class AppViews extends Component {
                             return <ChatList {...props}
                                 deleteChat={this.deleteChat}
                                 chats={this.state.chats}
+                                addUser={this.state.users}
                             />
                         } else {
                             return <Redirect to="/login" />

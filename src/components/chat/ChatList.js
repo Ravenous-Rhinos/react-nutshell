@@ -5,7 +5,7 @@ import "./Chat.css"
 
 
 export default class ChatList extends Component {
-    render(username, message) {
+    render() {
         return (
             <React.Fragment>
                 <div className="chatButton">
@@ -23,8 +23,12 @@ export default class ChatList extends Component {
                             <div key={chat.id} className="card">
                                 <div className="card-body">
                                     <h5 className="card-title">
+
                                         {chat.message}
                                     </h5>
+                                    <p>
+                                        {chat.date}
+                                    </p>
                                     <div className="card-link">
                                         <button type="button" className="separate-link"
                                             onClick={() => {
