@@ -42,6 +42,7 @@ export default Object.create(null, {
                 },
                 body: JSON.stringify(editItem)
             }).then(e => e.json())
+            .then(() => this.getAll(link))
         }
     },
     findUser: {
