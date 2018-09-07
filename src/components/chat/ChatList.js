@@ -24,18 +24,19 @@ export default class ChatList extends Component {
                                 <div className="card-body">
                                     <h5 className="card-title">
                                         {chat.message}
-
-                                        <button type="button"
-                                            className="btn btn-success"
+                                    </h5>
+                                    <div className="card-link">
+                                        <button type="button" className="separate-link"
                                             onClick={() => {
                                                 this.props.history.push(`/chats/edit/${chat.id}`)
                                             }}>
-                                            Edit Message
+                                            Edit
                                       </button>
                                         <button
-                                            onClick={() => this.props.deleteChat(chat.id, "chats")}
-                                            className="card-link">Delete</button>
-                                    </h5>
+                                            onClick={() => this.props.deleteChat(chat.id, "chats")} className="separate-link"
+                                        >Delete</button>
+                                    </div>
+
                                 </div>
                             </div>
                         )
