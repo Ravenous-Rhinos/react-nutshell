@@ -8,7 +8,7 @@ export default class ChatForm extends Component {
     }
 
     componentDidMount() {
-        const message = this.props.chats.find(a => a.id === parseInt(this.props.match.params.chatId))
+        const message = this.props.chats.find(a => a.id === parseInt(this.props.match.params.chatId, 0))
         this.setState(message);
     }
 
@@ -28,7 +28,7 @@ export default class ChatForm extends Component {
             const chat = {
                 message: this.state.message
             }
-            const chatEditId = parseInt(this.props.match.params.chatId)
+            const chatEditId = parseInt(this.props.match.params.chatId, 0)
 
             // Create the chat and redirect user to chat list
             this.props.editChat(chat, chatEditId, "chats").then(() => this.props.history.push("/chats"))

@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import "./Event.css"
-// import DataManager from "../data/DataManager"
 
 
 export default class EventForm extends Component {
@@ -8,8 +7,8 @@ export default class EventForm extends Component {
     
     state = {
         name: "",
-        detail: ""
-        // user: "",
+        detail: "",
+        date: ""
     }
 
     // Update state whenever an input field is edited
@@ -24,12 +23,11 @@ export default class EventForm extends Component {
         invoking the function reference passed from parent component
      */
     constructNewEvent = evt => {
-        // let user = JSON.parse(sessionStorage.getItem("credentials"))
         evt.preventDefault()
             const event = {
-                // user: this.state.users.id,
                 eventName: this.state.name,
                 eventDetail: this.state.detail,
+                eventDate: this.state.date
             }
 
             // Create the event and redirect user to event list
@@ -57,13 +55,14 @@ export default class EventForm extends Component {
                                id="detail" 
                                placeholder="Details" />
                     </div>
-                    {/* <div className="form-group">
-                        <label htmlFor="employee">Event Date</label>
-                        <select defaultValue="" name="employee" id="employee"
-                                onChange={this.handleFieldChange}>
-                            <option value="">Select a Date</option>
-                        </select>
-                    </div> */}
+                    <div className="form-group">
+                        <label htmlFor="eventDate">Event Date</label>
+                        <input type="date" required="true"
+                            className="form-control"
+                            onChange={this.handleFieldChange}
+                            id="date"
+                            placeholder="Event Date"/>
+                    </div>
                     <button type="submit" onClick={this.constructNewEvent} className="btn btn-primary">Submit</button>
                 </form>
             </React.Fragment>
