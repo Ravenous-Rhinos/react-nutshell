@@ -11,7 +11,7 @@ export default class ArticleEdit extends Component {
     }
 
     componentDidMount() {
-        const article = this.props.articles.find(a => a.id === parseInt(this.props.match.params.articleId))
+        const article = this.props.articles.find(a => a.id === parseInt(this.props.match.params.articleId, 0))
         this.setState(article);
     }
 
