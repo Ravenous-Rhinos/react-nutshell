@@ -4,7 +4,6 @@ import Login from './Login'
 import DataManager from '../data/DataManager'
 import "./AppViews.css"
 
-
 import ArticleForm from './article/ArticleForm'
 import ArticleList from './article/ArticleList'
 import ArticleEdit from './article/ArticleEdit'
@@ -39,10 +38,22 @@ export default class AppViews extends Component {
         chats: [],
         events: [],
         friends: [],
-        tasks: []
+        tasks: [],
+        users: []
     }
 
+    addUser = (user, link) => DataManager.post(user, link)
+        .then(users => this.setState({
+            users: users
+        }))
+
+    // ARTICLES
     addArticle = (article, link) => DataManager.post(article, link)
+        .then(() => DataManager.getAll("articles"))
+        .then(articles => this.setState({
+            articles: articles
+        }))
+    editArticle = (article, id, link) => DataManager.put(article, id, link)
         .then(() => DataManager.getAll("articles"))
         .then(articles => this.setState({
             articles: articles
@@ -54,6 +65,8 @@ export default class AppViews extends Component {
         }))
 
 
+
+    // CHATS
     addChat = (chat, link) => DataManager.post(chat, link)
         .then(chats => this.setState({
             chats: chats
@@ -68,6 +81,8 @@ export default class AppViews extends Component {
         }))
 
 
+
+    // EVENTS
     addEvent = (event, link) => DataManager.post(event, link)
         .then(() => DataManager.getAll("events"))
         .then(events => this.setState({
@@ -78,12 +93,15 @@ export default class AppViews extends Component {
         .then(events => this.setState({
             events: events
         }))
-    deletEvent = (id, link) => DataManager.removeAndList(id, link)
+    deleteEvent = (id, link) => DataManager.removeAndList(id, link)
         .then(() => DataManager.getAll("events"))
         .then(events => this.setState({
             events: events
         }))
 
+
+
+    // TASKS
     addTask = (task, link) => DataManager.post(task, link)
         .then(() => DataManager.getAll("tasks"))
         .then(tasks => this.setState({
@@ -94,12 +112,16 @@ export default class AppViews extends Component {
         .then(tasks => this.setState({
             tasks: tasks
         }))
+
+
     deleteTask = (id, link) => DataManager.removeAndList(id, link)
         .then(() => DataManager.getAll("tasks"))
         .then(tasks => this.setState({
             tasks: tasks
         }))
 
+
+    // FRIENDS
     addFriend = (friend, link) => DataManager.post(friend, link)
         .then(() => DataManager.getAll("friends"))
         .then(friends => this.setState({
@@ -116,23 +138,30 @@ export default class AppViews extends Component {
             friends: friends
         }))
 
+
+
     componentDidMount() {
         const _state = {}
         DataManager.getAll("articles").then(articles => _state.articles = articles)
-        .then(() => DataManager.getAll("chats").then(chats => _state.chats = chats))
-        .then(() => DataManager.getAll("events").then(events => _state.events = events))
-        .then(() => DataManager.getAll("tasks").then(tasks => _state.tasks = tasks))
-        .then(() => DataManager.getAll("friends").then(friends => _state.friends = friends))
-        .then(() => {this.setState(_state)})
+            .then(() => DataManager.getAll("chats").then(chats => _state.chats = chats))
+            .then(() => DataManager.getAll("events").then(events => _state.events = events))
+            .then(() => DataManager.getAll("tasks").then(tasks => _state.tasks = tasks))
+            .then(() => DataManager.getAll("friends").then(friends => _state.friends = friends))
+            .then(() => { this.setState(_state) })
     }
 
 
     render() {
         return (
-            <div className="viewArea">
-                <React.Fragment>
-                    <Route path="/login" component={Login} />
+            <React.Fragment>
+                <div className="viewArea">
 
+                    <Route path="/login" render={(props) => {
+                        return <Login {...props}
+                            addUser={this.addUser} />
+                    }} />
+
+                    {/* ARTICLES */}
                     <Route exact path="/articles" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <ArticleList {...props}
@@ -154,6 +183,7 @@ export default class AppViews extends Component {
                     }} />
 
 
+                    {/* CHATS */}
                     <Route exact path="/chats" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <ChatList {...props}
@@ -175,6 +205,7 @@ export default class AppViews extends Component {
                     }} />
 
 
+                    {/* EVENTS */}
                     <Route exact path="/events" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <EventList {...props}
@@ -193,11 +224,14 @@ export default class AppViews extends Component {
                             editEvent={this.editEvent} />
                     }} />
 
+
+                    {/* TASKS */}
                     <Route exact path="/tasks" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <TaskList {...props}
                                 tasks={this.state.tasks}
-                                deleteTask={this.deleteTask} />
+                                deleteTask={this.deleteTask}
+                            />
                         } else {
                             return <Redirect to="/login" />
                         }
@@ -211,6 +245,8 @@ export default class AppViews extends Component {
                             editTask={this.editTask} />
                     }} />
 
+
+                    {/* FRIENDS */}
                     <Route exact path="/friends" render={(props) => {
                         if (this.isAuthenticated()) {
                             return <FriendList {...props}
@@ -228,8 +264,8 @@ export default class AppViews extends Component {
                         return <FriendEdit {...props}
                             editFriend={this.editFriend} />
                     }} />
-                </React.Fragment>
-            </div>
+                </div>
+            </React.Fragment>
         )
     }
 

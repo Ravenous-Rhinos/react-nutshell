@@ -28,7 +28,8 @@ export default Object.create(null, {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(newItem)
-            }).then(e => e.json())
+            })
+                .then(e => e.json())
                 .then(() => this.getAll(link))
         }
     },
@@ -42,6 +43,12 @@ export default Object.create(null, {
                 body: JSON.stringify(editItem)
             }).then(e => e.json())
             .then(() => this.getAll(link))
+        }
+    },
+    findUser: {
+        value: (email, password) => {
+            return fetch(`http://localhost:5002/users?inputEmail=${email}&inputPassword=${password}`)
+                .then(response => response.json())
         }
     }
 })
