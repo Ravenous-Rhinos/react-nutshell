@@ -28,17 +28,10 @@ export default class ChatForm extends Component {
      */
     editChat = evt => {
         evt.preventDefault()
-<<<<<<< HEAD
-            const chat = {
-                message: this.state.message
-            }
-            const chatEditId = parseInt(this.props.match.params.chatId, 0)
-=======
         const chat = {
             message: this.state.message,
             date: this.state.date,
             userId: JSON.parse(sessionStorage.getItem("credentials")).id
->>>>>>> master
 
         }
         const chatEditId = parseInt(this.props.match.params.chatId)
