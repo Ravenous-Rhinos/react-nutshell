@@ -47,7 +47,7 @@ export default class AppViews extends Component {
             users: users
         }))
 
-    // ARTICLES
+    // ARTICLES. getAllArticles is used because I (Kelly) wanted to have them display is descending order by date. Couldn't figure out how to the other way.
     addArticle = (article, link) => DataManager.post(article, link)
         .then(() => DataManager.getAllArticles("articles"))
         .then(articles => this.setState({

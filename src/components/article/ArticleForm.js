@@ -14,6 +14,7 @@ export default class ArticleForm extends Component {
         this.setState(stateToChange)
     }
 
+    // Some "if" statements making sure that all fields are filled out. I dind't want to leave any forms empty.
     createNewArticle = evt => {
         evt.preventDefault()
         if (this.state.articleName === "") {
@@ -70,12 +71,12 @@ export default class ArticleForm extends Component {
                     </div>
                     <p></p>
                     <div className="form-group">
-                        <label htmlFor="article">Article Content:</label>
-                        <textarea id="textArea" rows="5" cols="5"
+                        <label htmlFor="article">Article Description:</label>
+                        <input tyoe="text" required="true"
                             className="form-control"
                             onChange={this.handleFieldChange}
                             id="articleContent"
-                            placeholder="Article Content" />
+                            placeholder="Article Description" />
                     </div>
                     <button type="submit" onClick={this.createNewArticle}
                         className="btn btn-primary">Submit Article</button>
