@@ -1,0 +1,33 @@
+.taskButton{
+    text-align: center
+}
+
+.task-name{
+    font-size: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+h5{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+h6{
+    color: rgba(154, 23, 32, 0.865)
+}
+
+.edit-button{
+text-align: center;
+font-size: 30px;
+font-family: 'Times New Roman', Times, serif
+}
+
+.delete-button{
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif
+}
+
+.card-body{
+    min-width: auto;
+    padding: 4px
+}
+
